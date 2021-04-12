@@ -191,11 +191,443 @@ where LAT_N is the northern latitude and LONG_W is the western longitude.
 **MySQL Solution**
 ```sql
 SELECT DISTINCT City FROM Station
-WHERE ID % 2 = 0;```
+WHERE ID % 2 = 0;
+```
+
+#####
+
+**[Weather Observation Station 4](https://www.hackerrank.com/challenges/weather-observation-station-4)**
+
+Let NUM be the number of CITY entries in STATION, and NUMunique be the number of unique cities. Query the value of NUM−NUMunique from STATION.
+
+In other words, query the number of non-unique CITY names in STATION by subtracting the number of unique CITY entries in the table from the total number of CITY entries in the table.
+
+Input Format
+
+The STATION table is described as follows:
+
+|  Field | Type |
+|---|---|
+| ID  | NUMBER |
+| CITY | VARCHAR2(21)   |
+| STATE  | VARCHAR2(2)  |
+| LAT_N |  NUMBER |
+| LONG_W | NUMBER |
+
+where LAT_N is the northern latitude and LONG_W is the western longitude.
+
+**MySQL Solution**
+```sql
+SELECT (COUNT(City) - COUNT(DISTINCT City)) from Station;     
+```
+
+#####
+
+**[Weather Observation Station 5](https://www.hackerrank.com/challenges/weather-observation-station-5)**
+
+Query the two cities in STATION with the shortest and longest CITY names, as well as their respective lengths (i.e.: number of characters in the name). If there is more than one smallest or largest city, choose the one that comes first when ordered alphabetically.
+
+Input Format
+
+The STATION table is described as follows:
+
+|  Field | Type |
+|---|---|
+| ID  | NUMBER |
+| CITY | VARCHAR2(21)   |
+| STATE  | VARCHAR2(2)  |
+| LAT_N |  NUMBER |
+| LONG_W | NUMBER |
+
+where LAT_N is the northern latitude and LONG_W is the western longitude.
+
+*Sample Input*
+
+Let's say that CITY only has four entries: DEF, ABC, PQRS and WXY
+
+*Sample Output*
+
+ABC 3 
+
+PQRS 4
+
+*Explanation*
+
+When ordered alphabetically, the CITY names are listed as ABC, DEF, PQRS, and WXY, with the respective lengths 3,3,4,3,3,4, and 33. The longest-named city is obviously PQRS, but there are 33 options for shortest-named city; we choose ABC, because it comes first alphabetically.
+
+**MySQL Solution**
+
+```sql
+SELECT City, LENGTH(City) FROM Station
+ORDER BY LENGTH(City), City ASC
+LIMIT 1;
+
+SELECT City, LENGTH(City) FROM Station
+ORDER BY LENGTH(City) DESC
+LIMIT 1;   
+```
+
+#####
+
+**[Weather Observation Station 6](https://www.hackerrank.com/challenges/weather-observation-station-6)**
+
+Query the list of CITY names starting with vowels (a, e, i, o, u) from STATION. Your result cannot contain duplicates.
+
+Input Format
+
+The STATION table is described as follows:
+
+|  Field | Type |
+|---|---|
+| ID  | NUMBER |
+| CITY | VARCHAR2(21)   |
+| STATE  | VARCHAR2(2)  |
+| LAT_N |  NUMBER |
+| LONG_W | NUMBER |
+
+where LAT_N is the northern latitude and LONG_W is the western longitude.
+
+**MySQL Solution**
+```sql
+SELECT DISTINCT City FROM Station
+WHERE City LIKE 'A%'
+OR City LIKE 'E%'
+OR City LIKE 'I%'
+OR City LIKE 'O%'
+OR City LIKE 'U%';     
+```
+
+#####
+
+**[Weather Observation Station 7](https://www.hackerrank.com/challenges/weather-observation-station-7)**
+
+Query the list of CITY names ending with vowels (a, e, i, o, u) from STATION. Your result cannot contain duplicates.
+
+Input Format
+
+The STATION table is described as follows:
+
+|  Field | Type |
+|---|---|
+| ID  | NUMBER |
+| CITY | VARCHAR2(21)   |
+| STATE  | VARCHAR2(2)  |
+| LAT_N |  NUMBER |
+| LONG_W | NUMBER |
+
+where LAT_N is the northern latitude and LONG_W is the western longitude.
+
+**MySQL Solution**
+```sql
+SELECT DISTINCT City FROM Station
+WHERE City LIKE '%a'
+OR City LIKE '%e'
+OR City LIKE '%i'
+OR City LIKE '%o'
+OR City LIKE '%u';       
+```
+
+#####
+
+**[Weather Observation Station 8](https://www.hackerrank.com/challenges/weather-observation-station-8/problem)**
+
+Query the list of CITY names from STATION which have vowels (i.e., a, e, i, o, and u) as both their first and last characters. Your result cannot contain duplicates.
+
+Input Format
+
+The STATION table is described as follows:
+
+|  Field | Type |
+|---|---|
+| ID  | NUMBER |
+| CITY | VARCHAR2(21)   |
+| STATE  | VARCHAR2(2)  |
+| LAT_N |  NUMBER |
+| LONG_W | NUMBER |
+
+where LAT_N is the northern latitude and LONG_W is the western longitude.
+
+**MySQL Solution**
+```sql
+SELECT DISTINCT City FROM Station
+WHERE (City LIKE '%A'
+OR City LIKE '%E'
+OR City LIKE '%I'
+OR City LIKE '%O'
+OR City LIKE '%U') 
+AND
+(City LIKE 'a%'
+OR City LIKE 'e%'
+OR City LIKE 'i%'
+OR City LIKE 'o%'
+OR City LIKE 'u%');
+```
+
+#####
+
+**[Weather Observation Station 9](https://www.hackerrank.com/challenges/weather-observation-station-9/problem)**
+
+Query the list of CITY names from STATION that do not start with vowels. Your result cannot contain duplicates.
+
+Input Format
+
+The STATION table is described as follows:
+
+|  Field | Type |
+|---|---|
+| ID  | NUMBER |
+| CITY | VARCHAR2(21)   |
+| STATE  | VARCHAR2(2)  |
+| LAT_N |  NUMBER |
+| LONG_W | NUMBER |
+
+where LAT_N is the northern latitude and LONG_W is the western longitude.
+
+**MySQL Solution**
+```sql
+SELECT DISTINCT City FROM Station
+WHERE NOT (City LIKE 'A%'
+OR  City LIKE 'I%'
+OR  City LIKE 'O%'
+OR  City LIKE 'U%'
+OR  City LIKE 'E%');
+```
+
+#####
+
+**[Weather Observation Station 10](https://www.hackerrank.com/challenges/weather-observation-station-10/problem)**
+
+Query the list of CITY names from STATION that do not end with vowels. Your result cannot contain duplicates.
+
+Input Format
+
+The STATION table is described as follows:
+
+|  Field | Type |
+|---|---|
+| ID  | NUMBER |
+| CITY | VARCHAR2(21)   |
+| STATE  | VARCHAR2(2)  |
+| LAT_N |  NUMBER |
+| LONG_W | NUMBER |
+
+where LAT_N is the northern latitude and LONG_W is the western longitude.
+
+**MySQL Solution**
+```sql
+SELECT DISTINCT City FROM Station
+WHERE NOT (City LIKE '%a'
+OR City LIKE '%e'
+OR City LIKE '%i'
+OR City LIKE '%o'
+OR City LIKE '%u');
+```
+
+#####
+
+**[Weather Observation Station 11](https://www.hackerrank.com/challenges/weather-observation-station-11/problem)**
+
+Query the list of CITY names from STATION that either do not start with vowels or do not end with vowels. Your result cannot contain duplicates.
+
+Input Format
+
+The STATION table is described as follows:
+
+|  Field | Type |
+|---|---|
+| ID  | NUMBER |
+| CITY | VARCHAR2(21)   |
+| STATE  | VARCHAR2(2)  |
+| LAT_N |  NUMBER |
+| LONG_W | NUMBER |
+
+where LAT_N is the northern latitude and LONG_W is the western longitude.
+
+**MySQL Solution**
+```sql
+SELECT DISTINCT CITY FROM STATION 
+WHERE CITY NOT REGEXP '^[AEIOU]' OR CITY NOT REGEXP '[AEIOU]$';
+```
+
+#####
+
+**[Weather Observation Station 12](https://www.hackerrank.com/challenges/weather-observation-station-12/problem)**
+
+Query the list of CITY names from STATION that do not start with vowels and do not end with vowels. Your result cannot contain duplicates.
+
+Input Format
+
+The STATION table is described as follows:
+
+|  Field | Type |
+|---|---|
+| ID  | NUMBER |
+| CITY | VARCHAR2(21)   |
+| STATE  | VARCHAR2(2)  |
+| LAT_N |  NUMBER |
+| LONG_W | NUMBER |
+
+where LAT_N is the northern latitude and LONG_W is the western longitude.
+
+**MySQL Solution**
+```sql
+SELECT DISTINCT City FROM Station
+WHERE City REGEXP "^[^aeiou].*[^aeiou]$";
+```
+
+#####
+
+**[Higher Than 75 marks](https://www.hackerrank.com/challenges/more-than-75-marks/problem)**
+
+Query the Name of any student in STUDENTS who scored higher than 75 Marks. Order your output by the last three characters of each name. If two or more students both have names ending in the same last three characters (i.e.: Bobby, Robby, etc.), secondary sort them by ascending ID.
+
+Input Format
+
+The STUDENTS table is described as follows:
+
+|  Column | Type |
+|---|---|
+| ID  | INTEGER |
+| NAME | STRING   |
+| MARKS  | INTEGER  |
+
+
+The Name column only contains uppercase (A-Z) and lowercase (a-z) letters.
+
+Sample Input
+
+|  ID | NAME | MARKS |
+|---|---|----|
+| 1  | ASHLEY | 81 | 
+| 2 | SAMANTHA   | 75 |
+| 4  | JULIA  |  76 |
+| 3  | JULIA  |  84 |
+
+Sample Output
+
+Ashley
+Julia
+Belvet
+
+Explanation
+
+Only Ashley, Julia, and Belvet have Marks > 75. If you look at the last three characters of each of their names, there are no duplicates and 'ley' < 'lia' < 'vet'.
+
+**MySQL Solution**
+```sql
+SELECT Name FROM Students
+WHERE Marks > 75
+ORDER BY SUBSTRING(Name, -3), ID;
+```
+
+#####
+
+**[Employee Names](https://www.hackerrank.com/challenges/name-of-employees/problem)**
+
+Write a query that prints a list of employee names (i.e.: the name attribute) from the Employee table in alphabetical order.
+
+Input Format
+
+The Employee table containing employee data for a company is described as follows:
+
+|  Column | Type |
+|---|---|
+| employee_id  | INTEGER |
+| name | STRING   |
+| months | INTEGER  |
+| salary | INTEGER |
+
+where employee_id is an employee's ID number, name is their name, months is the total number of months they've been working for the company, and salary is their monthly salary.
+
+Sample Input
+
+|  employee_id | name | marks | salary  |
+|---|---|----|-----|
+| 12228 | Rose | 15 | 1968 |
+| 33645 | Angela   | 1 | 3443 |
+| 45692  | Frank  | 17  | 1608  |
+| 56118  | Patrick  |  7 | 1345
+| 59725 | Lisa | 11 | 2330 |
+| 74197 | Kimberly   | 16 | 4372 |
+| 78454  | Bonnie  |  8 | 1771 |
+| 83565 | Michael |  6 | 2017
+| 98607  | Todd  |  5 | 3396 |
+| 99989 | Joe |  9 | 3573 |
+
+Sample Output
+
+Angela
+Bonnie
+Frank
+Joe
+Kimberly
+Lisa
+Michael
+Patrick
+Rose
+Todd
+
+**MySQL Solution**
+```sql
+SELECT Name FROM Employee
+ORDER BY Name;
+```
 
 #####
 
 
+**[Employee Salaries](https://www.hackerrank.com/challenges/salary-of-employees/problem)**
 
+Write a query that prints a list of employee names (i.e.: the name attribute) for employees in Employee having a salary greater than $2000 per month who have been employees for less than 10 months. Sort your result by ascending employee_id.
+
+Input Format
+
+The Employee table containing employee data for a company is described as follows:
+
+|  Column | Type |
+|---|---|
+| employee_id  | INTEGER |
+| name | STRING   |
+| months | INTEGER  |
+| salary | INTEGER |
+
+where employee_id is an employee's ID number, name is their name, months is the total number of months they've been working for the company, and salary is the their monthly salary.
+
+Sample Input
+
+|  employee_id | name | marks | salary  |
+|---|---|----|-----|
+| 12228 | Rose | 15 | 1968 |
+| 33645 | Angela   | 1 | 3443 |
+| 45692  | Frank  | 17  | 1608  |
+| 56118  | Patrick  |  7 | 1345
+| 59725 | Lisa | 11 | 2330 |
+| 74197 | Kimberly   | 16 | 4372 |
+| 78454  | Bonnie  |  8 | 1771 |
+| 83565 | Michael |  6 | 2017
+| 98607  | Todd  |  5 | 3396 |
+| 99989 | Joe |  9 | 3573 |
+
+Sample Output
+
+Angela
+Michael
+Todd
+Joe
+
+*Explanation*
+
+Angela has been an employee for 1 month and earns $3443 per month.
+Michael has been an employee for 6 months and earns $2017 per month.
+Todd has been an employee for 5 months and earns $3396 per month.
+Joe has been an employee for 9 months and earns $3573 per month.
+We order our output by ascending employee_id.
+
+**MySQL Solution**
+```sql
+SELECT Name FROM Employee
+WHERE Salary > 2000 AND Months < 10
+ORDER BY Employee_id ASC;
+```
 
 

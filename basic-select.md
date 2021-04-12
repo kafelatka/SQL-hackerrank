@@ -165,7 +165,7 @@ The STATION table is described as follows:
 
 **MySQL Solution**
 ```sql
-SELECT CITY, STATE FROM STATION;       
+SELECT City, State FROM Station;       
 ```
 
 #####
